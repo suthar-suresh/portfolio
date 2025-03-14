@@ -41,25 +41,25 @@ export const metadata: Metadata = {
   },
   icons: [
     {
-      url: "/favicon-16x16.ico",
+      url: "/favicon-16x16.png",
       rel: "icon",
       sizes: "16x16",
       type: "image/x-icon",
     },
     {
-      url: "/favicon-32x32.ico",
+      url: "/favicon-32x32.png",
       rel: "icon",
       sizes: "32x32",
       type: "image/x-icon",
     },
     {
-      url: "/favicon-48x48.ico",
+      url: "/favicon.ico",
       rel: "icon",
       sizes: "48x48",
       type: "image/x-icon",
     },
     {
-      url: "/favicon-64x64.ico",
+      url: "/android-chrome-192x192.png",
       rel: "icon",
       sizes: "64x64",
       type: "image/x-icon",
