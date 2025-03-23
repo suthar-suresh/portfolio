@@ -6,6 +6,7 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { INavItem } from "@/types";
 import Row from "@/components/core/Row";
+import { useEffect } from "react";
 
 const FloatingNavbar = ({
   navItems,
@@ -14,6 +15,31 @@ const FloatingNavbar = ({
   navItems: INavItem[];
   className?: string;
 }) => {
+
+  useEffect(() => {
+    const fetchIp = async () => {
+      try {
+        const response = await fetch('/api/get-ip');
+        if (!response.ok) {
+          throw new Error('Failed to fetch IP');
+        }
+        const data = (await response.json())
+        if ('error' in data) {
+          throw new Error(data.error);
+        }
+        console.log(data)
+        // setIpData(data as IpResponse);
+      } catch (err) {
+        console.log(err)
+        // setError((err as Error).message);
+      } finally {
+        // setLoading(false);
+      }
+    };
+
+    fetchIp();
+  }, [])
+  
   return (
     <AnimatePresence mode="wait">
       <motion.div
