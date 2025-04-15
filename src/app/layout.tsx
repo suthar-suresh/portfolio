@@ -25,7 +25,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Suresh Suthar",
+  title: "Suresh Suthar | Full Stack Developer & Designer",
   description:
     "Suresh Sutharis a dynamic Software Engineer and Full Stack Developer from India, adept at crafting innovative and scalable solutions using the latest front-end and back-end technologies. His expertise in modern tech stacks ensures seamless, high-performance applications.",
   robots: {
