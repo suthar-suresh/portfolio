@@ -46,9 +46,9 @@ export const navMenus: INavItem[] = [
     link: "/#contact",
     icon: faEnvelope,
   },
-  {
-    name: "Payment",
-    link: "/payment",
-    icon: faCreditCard,
-  },
+  // {
+  //   name: "Payment",
+  //   link: "/payment",
+  //   icon: faCreditCard,
+  // },
 ];
