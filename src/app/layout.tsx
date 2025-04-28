@@ -25,7 +25,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Suresh Suthar | Full Stack Developer | Scalable Digital Solutions",
+  title: "Portfolio | Suresh Suthar",
   description:
     "Suresh Suthar is a skilled Software Engineer and Full Stack Developer from India, building high-performance, scalable apps with modern front-end and back-end technologies.",
   robots: {
@@ -75,6 +75,22 @@ export const metadata: Metadata = {
     "indian developer",
     "suresh github",
   ],
+  openGraph: {
+    title: 'Portfolio | Suresh Suthar',
+    description:
+      'Suresh Suthar is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.',
+    url: 'https://suresh-suthar.vercel.app/',
+    images: 'https://suresh-suthar.vercel.app/og-image.png',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Portfolio | Suresh Suthar',
+    description:
+      'Suresh Suthar is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.',
+    images: 'https://suresh-suthar.vercel.app/og-image.png',
+  },
 };
 
 const GoogleAnalytics = dynamic(
