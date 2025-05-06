@@ -1,29 +1,48 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "../../../../lib/mongodb";
 
+// Helper function to get the client IP
+function getClientIp(request: NextRequest): string {
+  return (
+    request.headers.get("x-forwarded-for")?.split(",")[0] ||
+    request.headers.get("x-real-ip") ||
+    (request as any).ip ||
+    "Unknown"
+  );
+}
+
+// Function to convert UTC time to IST (UTC +5:30)
+function convertToIST(utcDate: Date): string {
+  // IST is UTC + 5:30
+  const IST_OFFSET = 5.5 * 60 * 60 * 1000; // Convert 5:30 hours to milliseconds
+
+  // Add the IST offset to the UTC date
+  const indiaTime = new Date(utcDate.getTime() + IST_OFFSET);
+
+  // Format the date in 'YYYY-MM-DD HH:mm:ss' format
+  const year = indiaTime.getFullYear();
+  const month = String(indiaTime.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+  const day = String(indiaTime.getDate()).padStart(2, '0');
+  const hours = String(indiaTime.getHours()).padStart(2, '0');
+  const minutes = String(indiaTime.getMinutes()).padStart(2, '0');
+  const seconds = String(indiaTime.getSeconds()).padStart(2, '0');
+  const milliseconds = indiaTime.getMilliseconds();
+
+  // Return the formatted IST timestamp
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
+}
+
+// Define the LocationResponse interface
 interface LocationResponse {
   ip: string;
   city: string;
   region: string;
   country: string;
   timezone: string;
+  timestamp?: string; // Optional field for timestamp
 }
 
-interface ErrorResponse {
-  error: string;
-}
-
-// 🔹 Helper function to get the client IP
-function getClientIp(request: NextRequest): string {
-  return (
-    request.headers.get("x-forwarded-for")?.split(",")[0] || // Get first IP if multiple exist
-    request.headers.get("x-real-ip") || // Alternative header
-    (request as any).ip || // Next.js default (may be undefined in local dev)
-    "Unknown"
-  );
-}
-
-// 🔹 Helper function to fetch full IP data from ipapi
+// Helper function to fetch full IP data from ipapi
 async function fetchLocationData(ip: string): Promise<{ filteredData: LocationResponse; fullResponse: any }> {
   console.log("Fetching data from ipapi for IP:", ip);
 
@@ -49,7 +68,7 @@ async function fetchLocationData(ip: string): Promise<{ filteredData: LocationRe
   return { filteredData, fullResponse: data };
 }
 
-// 🔹 Handle `GET` request (check database first, then fetch if needed)
+// Handle `GET` request (check database first, then fetch if needed)
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     console.log("Checking for IP data...");
@@ -67,18 +86,17 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     // ✅ Check if IP exists in `locations`
     const existingLocation = await locationCollection.findOne({ ip });
     if (existingLocation) {
-      console.log("IP found in DB, returning cached location data.");
+      console.log("IP found in DB, returning cached location data.", existingLocation);``
       return NextResponse.json(existingLocation, { status: 200 });
     }
 
-    // ✅ Check if full API response exists in `ipapi_responses`
     const cachedApiResponse = await ipapiCollection.findOne({ ip });
 
-    let filteredData: LocationResponse;
-    let fullResponse: any;
+    let filteredData;
+    let fullResponse;
 
     if (cachedApiResponse) {
-      console.log("Using cached IPAPI response from database.");
+      console.log("Using cached IPAPI response.");
       fullResponse = cachedApiResponse.fullResponse;
       filteredData = {
         ip: fullResponse.ip,
@@ -89,11 +107,19 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       };
     } else {
       console.log("Fetching fresh data from ipapi.");
+      // Fetch the location data and convert to IST
       ({ filteredData, fullResponse } = await fetchLocationData(ip));
 
       // Save full API response in `ipapi_responses`
       await ipapiCollection.insertOne({ ip, fullResponse, timestamp: new Date() });
     }
+
+    // Convert the current UTC timestamp to IST
+    const timestampInIST = convertToIST(new Date());
+    console.log("Log timestamp in IST:", timestampInIST);
+
+    // Save location data with the correct timestamp in the database
+    (filteredData as LocationResponse).timestamp = timestampInIST;
 
     // Save location data in `locations`
     await locationCollection.insertOne(filteredData);
@@ -105,7 +131,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   }
 }
 
-// 🔹 Handle `POST` request (fetch location data and save)
+// Handle `POST` request (fetch location data and save)
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     console.log("Handling POST request...");
@@ -150,7 +176,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       await ipapiCollection.insertOne({ ip, fullResponse, timestamp: new Date() });
     }
 
-    // Save filtered location data in `locations`
+    // Convert the current UTC timestamp to IST
+    const timestampInIST = convertToIST(new Date());
+    console.log("Log timestamp in IST:", timestampInIST);
+
+    // Save location data with the correct timestamp in the database
+    filteredData.timestamp = timestampInIST;
+
+    // Save location data in `locations`
     await locationCollection.insertOne(filteredData);
 
     return NextResponse.json(filteredData, { status: 200 });
