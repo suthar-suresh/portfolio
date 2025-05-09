@@ -28,9 +28,12 @@ interface IPLog {
   fullResponse: fullResponse;
   timestamp: string;
 }
+
 export default function AdminLogsPage() {
   const [logs, setLogs] = useState<IPLog[]>([]);
-  const [country_names, setCountry_names] = useState<[String]>(['']);
+  const [country_names, setCountry_names] = useState<string[]>([]);
+  const [Region, setRegion] = useState<string[]>([]);
+  const [City, setCity] = useState<string[]>([]);
   const [queryKey, setQueryKey] = useState("");
   const [accessGranted, setAccessGranted] = useState(false);
   const [page, setPage] = useState(1);
@@ -41,23 +44,23 @@ export default function AdminLogsPage() {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
-  const [Region, setRegion] = useState<[String]>(['']);
-  const [City, setCity] = useState<[String]>(['']);
 
-  const fetchLogs = async (event: React.FormEvent, pageNum = 1) => {
-    event.preventDefault();
+  const fetchLogs = async (pageNum = 1) => {
     const params = new URLSearchParams({
       page: pageNum.toString(),
       limit: "10",
     });
+
     if (startDate) params.append("start", startDate);
     if (endDate) params.append("end", endDate);
+    if (selectedCountry) params.append("country", selectedCountry);
+    if (selectedRegion) params.append("region", selectedRegion);
+    if (selectedCity) params.append("city", selectedCity);
 
     const res = await fetch(`/api/admin/logs?${params.toString()}`);
     if (res.ok) {
       const data = await res.json();
       setLogs(data.logs);
-      console.log(data);
       setTotalPages(data.totalPages);
       setTotalLogs(data.totalLogs);
       setPage(data.page);
@@ -69,13 +72,23 @@ export default function AdminLogsPage() {
       alert("Access denied");
     }
   };
-console.log(selectedCity, selectedRegion, selectedCountry);
+
+  const handleInitialSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    await fetchLogs(1);
+  };
+  useEffect(() => {
+    if (accessGranted) {
+      fetchLogs(1);
+    }
+  }, [startDate, endDate, selectedCountry, selectedRegion, selectedCity]);
+
   return (
     <div className="p-6 pt-20 max-w-screen-xl mx-auto text-white">
       {!accessGranted ? (
         <div className="max-w-md mx-auto">
           <h2 className="text-xl font-bold mb-4">Enter Admin Key</h2>
-          <form action="">
+          <form onSubmit={handleInitialSubmit}>
             <input
               type="password"
               className="border p-2 w-full rounded mb-2 bg-gray-800 text-white"
@@ -85,7 +98,6 @@ console.log(selectedCity, selectedRegion, selectedCountry);
             />
             <button
               type="submit"
-              onClick={(e) => fetchLogs(e as React.FormEvent)}
               className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
             >
               Submit
@@ -95,63 +107,70 @@ console.log(selectedCity, selectedRegion, selectedCountry);
       ) : (
         <>
           <div className="mb-4 flex flex-wrap gap-4 items-center">
-  <h2 className="text-2xl font-bold">IP Logs</h2>
-  
-  <input
-    type="date"
-    value={startDate}
-    onChange={(e) => setStartDate(e.target.value)}
-    className="border p-2 rounded bg-gray-800 text-white"
-  />
-  
-  <input
-    type="date"
-    value={endDate}
-    onChange={(e) => setEndDate(e.target.value)}
-    className="border p-2 rounded bg-gray-800 text-white"
-  />
+            <h2 className="text-2xl font-bold w-full">IP Logs</h2>
+            <div >
+          Start Date:<input
+              type="date"
+              value={startDate}
+              onChange={(e) => {
+                setStartDate(e.target.value);
+                fetchLogs(1);
+              }}
+              className="border p-2 rounded bg-gray-800 text-white"
+            /></div>
+            <div >
+            End Date:<input
+              type="date"
+              value={endDate}
+              onChange={(e) => {
+                setEndDate(e.target.value);
+                fetchLogs(1);
+              }}
+              className="border p-2 rounded bg-gray-800 text-white"
+            /></div>
 
-  <select
-    value={selectedCountry}
-    onChange={(e) => setSelectedCountry(e.target.value)}
-    className="border p-2 rounded bg-gray-800 text-white"
-    >
-    <option value="">Select Country</option>
-    {country_names.map((country_names)=>(<>
-    <option value="USA">{country_names}</option></>
-  ))}
-  </select>
+            <select
+              value={selectedCountry}
+              onChange={(e) => {
+                setSelectedCountry(e.target.value);
+                fetchLogs(1);
+              }}
+              className="border p-2 rounded bg-gray-800 text-white"
+            >
+              <option value="">Select Country</option>
+              {country_names.map((name, i) => (
+                <option key={i} value={name}>{name}</option>
+              ))}
+            </select>
 
-  <select
-    value={selectedRegion}
-    onChange={(e) => setSelectedRegion(e.target.value)}
-    className="border p-2 rounded bg-gray-800 text-white"
-    >
-    <option value="">Select Region</option>
-    {Region.map((region)=>(<>
-    <option value="USA">{region}</option></>
-  ))}
-  </select>
+            <select
+              value={selectedRegion}
+              onChange={(e) => {
+                setSelectedRegion(e.target.value);
+                fetchLogs(1);
+              }}
+              className="border p-2 rounded bg-gray-800 text-white"
+            >
+              <option value="">Select Region</option>
+              {Region.map((region, i) => (
+                <option key={i} value={region}>{region}</option>
+              ))}
+            </select>
 
-  <select
-    value={selectedCity}
-    onChange={(e) => setSelectedCity(e.target.value)}
-    className="border p-2 rounded bg-gray-800 text-white"
-    >
-    <option value="">Select City</option>
-    {City.map((city)=>(<>
-    <option value="USA">{city}</option></>
-  ))}
-  </select>
-
-  <button
-    onClick={(e) => fetchLogs(e, 1)}
-    className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-  >
-    Filter
-  </button>
-</div>
-
+            <select
+              value={selectedCity}
+              onChange={(e) => {
+                setSelectedCity(e.target.value);
+                fetchLogs(1);
+              }}
+              className="border p-2 rounded bg-gray-800 text-white"
+            >
+              <option value="">Select City</option>
+              {City.map((city, i) => (
+                <option key={i} value={city}>{city}</option>
+              ))}
+            </select>
+          </div>
 
           <div className="mb-2 text-sm text-gray-300">
             Showing <strong>{logs.length}</strong> of <strong>{totalLogs}</strong> logs
@@ -177,8 +196,14 @@ console.log(selectedCity, selectedRegion, selectedCountry);
                 {logs.map((log, i) => {
                   const fullResponse = log.fullResponse || {};
                   const date = new Date(log.timestamp);
-                  const formattedDate = date.toLocaleDateString(); // e.g., "5/8/2025"
-                  const formattedTime = date.toLocaleTimeString();
+                  const formattedDate = date.toLocaleDateString();
+                  const formattedTime = date.toLocaleTimeString("en-IN", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                    hour12: true,
+                  });
+
                   return (
                     <tr key={i} className="odd:bg-gray-800 even:bg-gray-700 hover:bg-gray-600">
                       <td className="border px-3 py-2">{fullResponse.ip}</td>
@@ -186,21 +211,20 @@ console.log(selectedCity, selectedRegion, selectedCountry);
                       <td className="border px-3 py-2">
                         <div className="flex items-center gap-2">
                           <Image
-                            src={fullResponse.location.country_flag || ""}
+                            src={fullResponse.location?.country_flag || ""}
                             width={20}
                             height={20}
-                            alt={fullResponse.continent_name}
+                            alt={fullResponse.country_name || ""}
                           />
                           <span>{fullResponse.country_name}</span>
                         </div>
                       </td>
-
                       <td className="border px-3 py-2">{fullResponse.region_name}</td>
                       <td className="border px-3 py-2">{fullResponse.city}</td>
                       <td className="border px-3 py-2">{fullResponse.latitude}</td>
                       <td className="border px-3 py-2">{fullResponse.longitude}</td>
                       <td className="border px-3 py-2">
-                        {fullResponse.location.languages[0].name || "-"}
+                        {fullResponse.location?.languages?.[0]?.name || "-"}
                       </td>
                       <td className="border px-3 py-2">{formattedDate}</td>
                       <td className="border px-3 py-2">{formattedTime}</td>
@@ -213,9 +237,11 @@ console.log(selectedCity, selectedRegion, selectedCountry);
 
           <div className="flex justify-between mt-4">
             <button
-              onClick={(e) => fetchLogs(e as React.FormEvent, page - 1)}
+              onClick={() => fetchLogs(page - 1)}
               disabled={page <= 1}
-              className={`px-4 py-2 rounded ${page <= 1 ? "bg-gray-500 text-gray-300" : "bg-blue-600 text-white hover:bg-blue-700"
+              className={`px-4 py-2 rounded ${page <= 1
+                ? "bg-gray-500 text-gray-300"
+                : "bg-blue-600 text-white hover:bg-blue-700"
                 }`}
             >
               Previous
@@ -224,7 +250,7 @@ console.log(selectedCity, selectedRegion, selectedCountry);
               Page <strong>{page}</strong> of <strong>{totalPages}</strong>
             </span>
             <button
-              onClick={(e) => fetchLogs(e as React.FormEvent, page + 1)}
+              onClick={() => fetchLogs(page + 1)}
               disabled={page >= totalPages}
               className={`px-4 py-2 rounded ${page >= totalPages
                 ? "bg-gray-500 text-gray-300"

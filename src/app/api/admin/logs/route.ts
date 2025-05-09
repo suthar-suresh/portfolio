@@ -9,12 +9,16 @@ export async function GET(request: NextRequest) {
     const start = request.nextUrl.searchParams.get("start");
     const end = request.nextUrl.searchParams.get("end");
 
+    const country = request.nextUrl.searchParams.get("country");
+    const region = request.nextUrl.searchParams.get("region");
+    const city = request.nextUrl.searchParams.get("city");
+
     const db = await connectToDatabase();
     const ipapiCollection = db.collection("ipapi_responses");
-  
-  const country_name = await ipapiCollection.distinct("fullResponse.country_name")
-  const regions_name = await ipapiCollection.distinct("fullResponse.region_name");
-  const cities_name = await ipapiCollection.distinct("fullResponse.city");
+
+    const country_name = await ipapiCollection.distinct("fullResponse.country_name");
+    const regions_name = await ipapiCollection.distinct("fullResponse.region_name");
+    const cities_name = await ipapiCollection.distinct("fullResponse.city");
 
     const query: any = {};
     if (start || end) {
@@ -23,10 +27,12 @@ export async function GET(request: NextRequest) {
       if (end) query.timestamp.$lte = new Date(end);
     }
 
-    // Get the total number of logs matching the query
+    if (country) query["fullResponse.country_name"] = country;
+    if (region) query["fullResponse.region_name"] = region;
+    if (city) query["fullResponse.city"] = city;
+
     const total = await ipapiCollection.countDocuments(query);
     const totalPages = Math.max(Math.ceil(total / limit), 1);
-
     const currentPage = Math.min(Math.max(page, 1), totalPages);
     const skip = (currentPage - 1) * limit;
 
@@ -42,7 +48,7 @@ export async function GET(request: NextRequest) {
           "fullResponse.city": 1,
           "fullResponse.latitude": 1,
           "fullResponse.longitude": 1,
-         "fullResponse.location.languages": 1,
+          "fullResponse.location.languages": 1,
           "fullResponse.location.country_flag": 1,
         },
       })
@@ -52,13 +58,13 @@ export async function GET(request: NextRequest) {
       .toArray();
 
     return NextResponse.json({
-      logs: logs,
+      logs,
       page: currentPage,
       totalPages,
       totalLogs: total,
-      country_name: country_name,
-      regions_name: regions_name,
-      cities_name: cities_name,
+      country_name,
+      regions_name,
+      cities_name,
     });
   } catch (error) {
     console.error("API Error:", error);
