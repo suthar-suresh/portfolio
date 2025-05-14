@@ -25,7 +25,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Suresh Suthar",
+  title: "Suresh Suthar | Full Stack Developer",
   description:
     "Suresh Suthar is a skilled Full Stack Developer dedicated to building fast, scalable, and innovative web applications using the latest modern technologies.",
   robots: {
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     "suresh github",
   ],
   openGraph: {
-    title: 'Portfolio | Suresh Suthar',
+    title: 'Suresh Suthar | Full Stack Developer',
     description:
       'Suresh Suthar is a skilled Full Stack Developer dedicated to building fast, scalable, and innovative web applications using the latest modern technologies.',
     url: 'https://suresh-suthar.vercel.app/',
@@ -86,7 +86,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Portfolio | Suresh Suthar',
+    title: 'Suresh Suthar | Full Stack Developer',
     description:
       'Suresh Suthar is a skilled Full Stack Developer dedicated to building fast, scalable, and innovative web applications using the latest modern technologies.',
     images: 'https://suresh-suthar.vercel.app/og-image.png',
