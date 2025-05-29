@@ -77,11 +77,17 @@ export default function AdminLogsPage() {
     event.preventDefault();
     await fetchLogs(1);
   };
+
+  // ✅ Debounced filter effect
   useEffect(() => {
-    if (accessGranted) {
+    if (!accessGranted) return;
+
+    const handler = setTimeout(() => {
       fetchLogs(1);
-    }
-  }, [startDate, endDate, selectedCountry, selectedRegion, selectedCity]);
+    }, 500); // Adjust debounce delay as needed
+
+    return () => clearTimeout(handler);
+  }, [startDate, endDate, selectedCountry, selectedRegion, selectedCity, accessGranted]);
 
   return (
     <div className="p-6 pt-20 max-w-screen-xl mx-auto text-white">
@@ -108,33 +114,30 @@ export default function AdminLogsPage() {
         <>
           <div className="mb-4 flex flex-wrap gap-4 items-center">
             <h2 className="text-2xl font-bold w-full">IP Logs</h2>
-            <div >
-          Start Date:<input
-              type="date"
-              value={startDate}
-              onChange={(e) => {
-                setStartDate(e.target.value);
-                fetchLogs(1);
-              }}
-              className="border p-2 rounded bg-gray-800 text-white"
-            /></div>
-            <div >
-            End Date:<input
-              type="date"
-              value={endDate}
-              onChange={(e) => {
-                setEndDate(e.target.value);
-                fetchLogs(1);
-              }}
-              className="border p-2 rounded bg-gray-800 text-white"
-            /></div>
+
+            <div>
+              Start Date:
+              <input
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                className="border p-2 rounded bg-gray-800 text-white"
+              />
+            </div>
+
+            <div>
+              End Date:
+              <input
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                className="border p-2 rounded bg-gray-800 text-white"
+              />
+            </div>
 
             <select
               value={selectedCountry}
-              onChange={(e) => {
-                setSelectedCountry(e.target.value);
-                fetchLogs(1);
-              }}
+              onChange={(e) => setSelectedCountry(e.target.value)}
               className="border p-2 rounded bg-gray-800 text-white"
             >
               <option value="">Select Country</option>
@@ -145,10 +148,7 @@ export default function AdminLogsPage() {
 
             <select
               value={selectedRegion}
-              onChange={(e) => {
-                setSelectedRegion(e.target.value);
-                fetchLogs(1);
-              }}
+              onChange={(e) => setSelectedRegion(e.target.value)}
               className="border p-2 rounded bg-gray-800 text-white"
             >
               <option value="">Select Region</option>
@@ -159,10 +159,7 @@ export default function AdminLogsPage() {
 
             <select
               value={selectedCity}
-              onChange={(e) => {
-                setSelectedCity(e.target.value);
-                fetchLogs(1);
-              }}
+              onChange={(e) => setSelectedCity(e.target.value)}
               className="border p-2 rounded bg-gray-800 text-white"
             >
               <option value="">Select City</option>
