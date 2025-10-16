@@ -5,15 +5,17 @@ import ConstrainedBox from "@/components/core/constrained-box";
 import ResponsiveBox from "@/components/core/ResponsiveBox";
 import Row from "@/components/core/Row";
 import { FlipWords } from "@/components/common/FlipWords";
+import ParticleBackground from "@/components/common/ParticleBackground";
 import socialLinks from "@/data/socialLinks";
 import TalkButton from "./ui/TalkButton";
 
 const HomeSection1 = ({ id }: Readonly<{ id: string }>) => {
   return (
     <ResponsiveBox
-      classNames="dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] min-h-screen items-center justify-center relative overflow-hidden rounded-md"
+      classNames="dark:bg-[var(--bgColor)] bg-[var(--bgColor)] min-h-screen items-center justify-center relative overflow-hidden rounded-md"
       id={id}
     >
+      <ParticleBackground />
       <ConstrainedBox classNames="px-4 py-8 pt-16 z-20 items-center justify-center">
         <Column classNames="w-full items-center justify-center">
 
@@ -44,10 +46,10 @@ const HomeSection1 = ({ id }: Readonly<{ id: string }>) => {
           <h2 className="text-base/6 font-medium text-center">Follow me here</h2>
 
           <Row classNames="mt-2 gap-2">
-            {socialLinks.slice(0, 5).map((link, index) => {
+            {socialLinks.slice(0, 5).map((link) => {
               return (
                 <Link
-                  key={`social-link-${index}`}
+                  key={`social-link-${link.name || link.text}`}
                   href={link.url}
                   target="_blank"
                   className="app__outlined_btn !rounded-full !p-2 lg:!p-3 !aspect-square !border-[var(--textColor)]"
