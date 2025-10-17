@@ -34,6 +34,12 @@ const HomeSection1 = ({ id }: Readonly<{ id: string }>) => {
           <h2 className="text-sm/normal md:text-base/normal dark:text-[var(--textColorLight)] text-[var(--textColorLight)] mt-4 text-center">
             Full Stack Developer 💻 SDE 🛠️ Open Source 🌍
           </h2>
+      
+          <p className="text-sm/normal md:text-base/normal dark:text-[var(--textColorLight)] text-[var(--textColorLight)] mt-6 text-center max-w-4xl mx-auto">
+            Professional Full Stack Developer specializing in React.js, Next.js, Node.js, MongoDB, and AWS. 
+            Building scalable web applications, e-commerce platforms, and modern digital solutions. 
+            Available for freelance projects and open to new opportunities.
+          </p>
 
           {/* CTA Button */}
           <div className="gap-4 mt-12 lg:mt-16 flex flex-col md:flex-row">
