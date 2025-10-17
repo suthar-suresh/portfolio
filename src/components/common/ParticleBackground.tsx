@@ -1,18 +1,35 @@
 "use client";
 
-import { useCallback } from "react";
-import Particles from "react-particles";
-import { loadSlim } from "tsparticles-slim";
-import type { Engine } from "tsparticles-engine";
+import { useCallback, useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+
+// Dynamically import Particles to avoid SSR issues
+const Particles = dynamic(() => import("react-particles").then(mod => mod.default), {
+  ssr: false,
+  loading: () => <div className="absolute inset-0 z-0" />
+});
 
 const ParticleBackground = () => {
-  const particlesInit = useCallback(async (engine: Engine) => {
-    await loadSlim(engine);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const particlesInit = useCallback(async (engine: any) => {
+    if (typeof window !== "undefined") {
+      const { loadSlim } = await import("tsparticles-slim");
+      await loadSlim(engine);
+    }
   }, []);
 
   const particlesLoaded = useCallback(async () => {
     // Particles loaded callback
   }, []);
+
+  if (!isClient) {
+    return <div className="absolute inset-0 z-0" />;
+  }
 
   return (
     <Particles
