@@ -79,7 +79,7 @@ const IconSkeleton = ({ item }: Readonly<{ item: IServiceItem }>) => {
         <IconContainer className="h-8 w-8 circle-1">
           <Image
             src={item.icons[0]}
-            alt={`icon-1`}
+            alt={`${item.title} technology icon 1`}
             width={144}
             height={144}
             sizes="100%"
@@ -92,7 +92,7 @@ const IconSkeleton = ({ item }: Readonly<{ item: IServiceItem }>) => {
         <IconContainer className="h-12 w-12 circle-2">
           <Image
             src={item.icons[1]}
-            alt={`icon-2`}
+            alt={`${item.title} technology icon 2`}
             width={144}
             height={144}
             sizes="100%"
@@ -105,7 +105,7 @@ const IconSkeleton = ({ item }: Readonly<{ item: IServiceItem }>) => {
         <IconContainer className="circle-3">
           <Image
             src={item.icons[2]}
-            alt={`icon-3`}
+            alt={`${item.title} technology icon 3`}
             width={144}
             height={144}
             sizes="100%"
@@ -118,7 +118,7 @@ const IconSkeleton = ({ item }: Readonly<{ item: IServiceItem }>) => {
         <IconContainer className="h-12 w-12 circle-4">
           <Image
             src={item.icons[3]}
-            alt={`icon-4`}
+            alt={`${item.title} technology icon 4`}
             width={144}
             height={144}
             sizes="100%"
@@ -131,7 +131,7 @@ const IconSkeleton = ({ item }: Readonly<{ item: IServiceItem }>) => {
         <IconContainer className="h-8 w-8 circle-5">
           <Image
             src={item.icons[4]}
-            alt={`icon-5`}
+            alt={`${item.title} technology icon 5`}
             width={144}
             height={144}
             sizes="100%"

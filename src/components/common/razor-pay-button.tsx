@@ -12,7 +12,7 @@ function RazorPayButton() {
     >
       <Image
         src="/images/razorpay-logo.png"
-        alt={`razor-pay-button`}
+        alt="Razorpay secure payment gateway logo"
         width={100}
         height={100}
         className="h-[1.5rem] w-auto aspect-square"

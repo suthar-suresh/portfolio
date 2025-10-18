@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "../../../../lib/mongodb";
 
+// Force dynamic rendering for this API route
+export const dynamic = 'force-dynamic';
+
 // Helper function to get the client IP
 function getClientIp(request: NextRequest): string {
   return (
