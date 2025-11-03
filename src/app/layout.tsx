@@ -108,7 +108,7 @@ export const metadata: Metadata = {
     canonical: "https://suresh-suthar.vercel.app/",
   },
   openGraph: {
-    title: 'Suresh Suthar | Full Stack Developer | React.js, Next.js, Node.js Expert',
+    title: 'Suresh Suthar | Full Stack JavaScript Developer',
     description:
       'Professional Full Stack Developer specializing in React.js, Next.js, Node.js, MongoDB, and AWS. Building scalable web applications, e-commerce platforms, and modern digital solutions. Available for freelance projects.',
     url: 'https://suresh-suthar.vercel.app/',
