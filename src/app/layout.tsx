@@ -95,7 +95,7 @@ export const metadata: Metadata = {
     "responsive web design",
     "seo friendly websites"
   ],
-  authors: [{ name: "Suresh Suthar", url: "https://suresh-suthar.vercel.app/" }],
+  authors: [{ name: "Suresh Suthar", url: "https://www.sureshsuthar.in/" }],
   creator: "Suresh Suthar",
   publisher: "Suresh Suthar",
   formatDetection: {
@@ -103,19 +103,19 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://suresh-suthar.vercel.app"),
+  metadataBase: new URL("https://www.sureshsuthar.in"),
   alternates: {
-    canonical: "https://suresh-suthar.vercel.app/",
+    canonical: "https://www.sureshsuthar.in/",
   },
   openGraph: {
     title: 'Suresh Suthar | Full Stack JavaScript Developer',
     description:
       'Professional Full Stack Developer specializing in React.js, Next.js, Node.js, MongoDB, and AWS. Building scalable web applications, e-commerce platforms, and modern digital solutions. Available for freelance projects.',
-    url: 'https://suresh-suthar.vercel.app/',
+    url: 'https://www.sureshsuthar.in/',
     siteName: 'Suresh Suthar Portfolio',
     images: [
       {
-        url: 'https://suresh-suthar.vercel.app/og-image.png',
+        url: 'https://www.sureshsuthar.in/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Suresh Suthar - Full Stack Developer Portfolio',
@@ -129,7 +129,7 @@ export const metadata: Metadata = {
     title: 'Suresh Suthar | Full Stack Developer | React.js, Next.js, Node.js Expert',
     description:
       'Professional Full Stack Developer specializing in React.js, Next.js, Node.js, MongoDB, and AWS. Building scalable web applications and modern digital solutions.',
-    images: ['https://suresh-suthar.vercel.app/og-image.png'],
+    images: ['https://www.sureshsuthar.in/og-image.png'],
     creator: '@sksuthar',
   },
   verification: {
