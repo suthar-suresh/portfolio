@@ -26,9 +26,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Suresh Suthar | Full Stack Developer | React.js, Next.js, Node.js Expert",
+  title: "Suresh Suthar | Full Stack JavaScript Developer",
   description:
-    "Professional Full Stack Developer specializing in React.js, Next.js, Node.js, MongoDB, and AWS. Building scalable web applications, e-commerce platforms, and modern digital solutions. Available for freelance projects.",
+    "Full Stack JavaScript Developer specializing in React.js, Next.js, Node.js & MongoDB. Building scalable web apps & e-commerce platforms.",
   robots: {
     index: true,
     follow: true,
@@ -110,7 +110,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Suresh Suthar | Full Stack JavaScript Developer',
     description:
-      'Professional Full Stack Developer specializing in React.js, Next.js, Node.js, MongoDB, and AWS. Building scalable web applications, e-commerce platforms, and modern digital solutions. Available for freelance projects.',
+      'Full Stack JavaScript Developer specializing in React.js, Next.js, Node.js & MongoDB. Building scalable web apps & e-commerce platforms.',
     url: 'https://www.sureshsuthar.in/',
     siteName: 'Suresh Suthar Portfolio',
     images: [
@@ -126,9 +126,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Suresh Suthar | Full Stack Developer | React.js, Next.js, Node.js Expert',
+    title: 'Suresh Suthar | Full Stack JavaScript Developer',
     description:
-      'Professional Full Stack Developer specializing in React.js, Next.js, Node.js, MongoDB, and AWS. Building scalable web applications and modern digital solutions.',
+      'Full Stack JavaScript Developer specializing in React.js, Next.js, Node.js & MongoDB. Building scalable web apps & e-commerce platforms.',
     images: ['https://www.sureshsuthar.in/og-image.png'],
     creator: '@sksuthar',
   },
