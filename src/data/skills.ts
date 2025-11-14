@@ -147,12 +147,12 @@ const skills: ISkillListItem[] = [
       {
         title: "Collaboration",
         level: SkillLevel.Expert,
-        icon: "/images/collaboration.png",
+        icon: "/images/collaboration.webp",
       },
       {
         title: "Analytical Skills",
         level: SkillLevel.Expert,
-        icon: "/images/analytical-skills.png",
+        icon: "/images/analytical-skills.webp",
       },
     ],
   },

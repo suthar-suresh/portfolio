@@ -34,9 +34,9 @@ const services: IServiceItem[] = [
     title: "Product Strategy",
     icons: [
       "/skills/git.svg",
-      "/images/collaboration.png",
+      "/images/collaboration.webp",
       "/images/logical-thinking.png",
-      "/images/analytical-skills.png",
+      "/images/analytical-skills.webp",
       "/skills/ubuntu.png",
     ],
     shortDescription:
