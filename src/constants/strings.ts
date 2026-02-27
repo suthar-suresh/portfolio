@@ -20,8 +20,8 @@ class Strings {
   static twitterUsername = "sksuthar";
 
   static email = "Email";
-  static primaryEmailLink = "mailto:sureshksuthar9473@gmail.com";
-  static primaryEmail = "sureshksuthar9473@gmail.com";
+  static primaryEmailLink = "mailto:sureshksuthar002@gmail.com";
+  static primaryEmail = "sureshksuthar002@gmail.com";
 
   static buyMeACoffee = "BuyMeACoffee";
   static buyMeACoffeeLink = "";

@@ -30,7 +30,7 @@ Feel free to connect with me through my social media:
 - **LinkedIn**: [@suresh-suthar](https://www.linkedin.com/in/suresh-suthar-9838b2255/)
 - **Instagram**: [@suresh__suthar](https://www.instagram.com/suresh_suthar_73)
 - **GitHub**: [@suthar-suresh](https://github.com/suthar-suresh)
-- **Email**: sureshksuthar9473@gmail.com
+- **Email**: sureshksuthar002@gmail.com
 
 ---
 

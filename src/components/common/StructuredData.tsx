@@ -16,7 +16,7 @@ const StructuredData = () => {
       "https://www.instagram.com/suresh_suthar_73/",
       "https://t.me/sureshksuthar"
     ],
-    "email": "sureshksuthar9473@gmail.com",
+    "email": "sureshksuthar002@gmail.com",
     "knowsAbout": [
       "Full Stack Development",
       "React.js",
@@ -91,7 +91,7 @@ const StructuredData = () => {
     "provider": {
       "@type": "Person",
       "name": "Suresh Suthar",
-      "email": "sureshksuthar9473@gmail.com"
+      "email": "sureshksuthar002@gmail.com"
     },
     "serviceType": [
       "Web Development",
