@@ -1,4 +1,5 @@
 // Structured data for SEO optimization
+import { SITE_URL } from "@/constants/site";
 
 const StructuredData = () => {
   const personSchema = {
@@ -8,8 +9,8 @@ const StructuredData = () => {
     "alternateName": ["sksuthar", "suresh-suthar"],
     "jobTitle": "Full Stack Developer",
     "description": "Skilled Full Stack Developer specializing in MERN stack, Next.js, and modern web technologies. Building fast, scalable, and innovative web applications.",
-    "url": "https://www.sureshsuthar.in/",
-    "image": "https://www.sureshsuthar.in/og-image.png",
+    "url": `${SITE_URL}/`,
+    "image": `${SITE_URL}/og-image.png`,
     "sameAs": [
       "https://github.com/suthar-suresh",
       "https://www.linkedin.com/in/suresh-suthar-9838b2255/",
@@ -67,7 +68,7 @@ const StructuredData = () => {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Suresh Suthar - Full Stack Developer",
-    "url": "https://www.sureshsuthar.in/",
+    "url": `${SITE_URL}/`,
     "description": "Portfolio website of Suresh Suthar, a skilled Full Stack Developer specializing in modern web technologies and building scalable applications.",
     "author": {
       "@type": "Person",
@@ -77,7 +78,7 @@ const StructuredData = () => {
     "copyrightYear": new Date().getFullYear(),
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://www.sureshsuthar.in/?q={search_term_string}",
+      "target": `${SITE_URL}/?q={search_term_string}`,
       "query-input": "required name=search_term_string"
     }
   };
@@ -87,7 +88,7 @@ const StructuredData = () => {
     "@type": "ProfessionalService",
     "name": "Suresh Suthar - Full Stack Development Services",
     "description": "Professional full stack development services including web development, backend development, DevOps, database management, and product strategy.",
-    "url": "https://www.sureshsuthar.in/",
+    "url": `${SITE_URL}/`,
     "provider": {
       "@type": "Person",
       "name": "Suresh Suthar",

@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { navMenus } from "@/data/navMenus";
 import StructuredData from "@/components/common/StructuredData";
+import { SITE_URL } from "@/constants/site";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -95,7 +96,7 @@ export const metadata: Metadata = {
     "responsive web design",
     "seo friendly websites"
   ],
-  authors: [{ name: "Suresh Suthar", url: "https://www.sureshsuthar.in/" }],
+  authors: [{ name: "Suresh Suthar", url: `${SITE_URL}/` }],
   creator: "Suresh Suthar",
   publisher: "Suresh Suthar",
   formatDetection: {
@@ -103,19 +104,19 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://www.sureshsuthar.in"),
+  metadataBase: new URL(SITE_URL),
   alternates: {
-    canonical: "https://www.sureshsuthar.in/",
+    canonical: `${SITE_URL}/`,
   },
   openGraph: {
     title: 'Suresh Suthar | Full Stack JavaScript Developer',
     description:
       'Full Stack JavaScript Developer specializing in React.js, Next.js, Node.js & MongoDB. Building scalable web apps & e-commerce platforms.',
-    url: 'https://www.sureshsuthar.in/',
+    url: `${SITE_URL}/`,
     siteName: 'Suresh Suthar Portfolio',
     images: [
       {
-        url: 'https://www.sureshsuthar.in/og-image.png',
+        url: `${SITE_URL}/og-image.png`,
         width: 1200,
         height: 630,
         alt: 'Suresh Suthar - Full Stack Developer Portfolio',
@@ -129,7 +130,7 @@ export const metadata: Metadata = {
     title: 'Suresh Suthar | Full Stack JavaScript Developer',
     description:
       'Full Stack JavaScript Developer specializing in React.js, Next.js, Node.js & MongoDB. Building scalable web apps & e-commerce platforms.',
-    images: ['https://www.sureshsuthar.in/og-image.png'],
+    images: [`${SITE_URL}/og-image.png`],
     creator: '@sksuthar',
   },
   verification: {
