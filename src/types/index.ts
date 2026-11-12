@@ -22,6 +22,9 @@ export interface IExperienceItem {
   endDate?: string;
   isCurrentJob: boolean;
   location: string;
+  employmentType?: string;
+  workplaceType?: string;
+  skills?: string[];
   shortDescription?: string;
   description: string[];
 }

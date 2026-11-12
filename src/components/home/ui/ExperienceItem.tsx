@@ -9,19 +9,30 @@ const ExperienceItem = ({ data }: { data: IExperienceItem }) => {
         <p className="text-lg/6 font-semibold">{data.designation}</p>
 
         <p className="text-[var(--textColorLight)] text-base/6 font-medium">
-          @{data.company}
+          {data.company}
+          {data.employmentType && ` · ${data.employmentType}`}
         </p>
+        {(data.location || data.workplaceType) && (
+          <p className="text-sm/6 text-[var(--textColorLight)]">
+            {[data.location, data.workplaceType].filter(Boolean).join(" · ")}
+          </p>
+        )}
       </Column>
 
-      <div className="w-full flex flex-col gap-2 relative mt-0 md:mt-8">
-        {data.description.map((desc, i) => {
-          return (
+      {(data.description.length > 0 || data.skills?.length) && (
+        <div className="w-full flex flex-col gap-2 relative mt-0 md:mt-8">
+          {data.description.map((desc, i) => (
             <BulletedText key={`exp-desc-${i}`}>
               <p className="text-base/6 font-normal">{desc}</p>
             </BulletedText>
-          );
-        })}
-      </div>
+          ))}
+          {data.skills && (
+            <p className="text-sm/6 font-medium break-words">
+              Skills: {data.skills.join(", ")}
+            </p>
+          )}
+        </div>
+      )}
     </Column>
   );
 };
