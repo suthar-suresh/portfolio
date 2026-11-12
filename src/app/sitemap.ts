@@ -1,12 +1,12 @@
 import { MetadataRoute } from 'next'
+import { SITE_URL } from '@/constants/site'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.sureshsuthar.in'
   const currentDate = new Date().toISOString()
 
   return [
     {
-      url: baseUrl,
+      url: SITE_URL,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 1,

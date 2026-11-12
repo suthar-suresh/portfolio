@@ -4,7 +4,7 @@ Welcome to my personal portfolio! 🚀
 
 I'm **Suresh Suthar**, a passionate **Full Stack Developer**, always excited to create beautiful and functional experiences. Explore my work and get to know me better. 😎
 
-[![Portfolio Banner](https://raw.githubusercontent.com/suthar-suresh/portfolio/refs/heads/main/public/og-image.png)](https://www.sureshsuthar.in/)
+[![Portfolio Banner](https://raw.githubusercontent.com/suthar-suresh/portfolio/refs/heads/main/public/og-image.png)](https://sureshsuthar.com/)
 
 ---
 
