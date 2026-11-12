@@ -16,7 +16,7 @@ const HomeSection3 = ({ id }: { id: string }) => {
 
         <Timeline
           data={experiences.map((exp, i) => ({
-            title: exp.startDate + " - " + (exp.endDate || "Present"),
+            title: `${exp.startDate} - ${exp.isCurrentJob ? "Present" : exp.endDate || "Present"}`,
             content: <ExperienceItem key={`experience-${i}`} data={exp} />,
           }))}
         />
